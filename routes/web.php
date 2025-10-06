@@ -25,7 +25,9 @@ use App\Http\Controllers\VideoCallController;
 use App\Http\Controllers\GoogleAuthController;
 
 // 🏠 Public Home
-Route::get('/', fn () => view('index'));
+Route::get('/', function () {
+    return response()->json(['message' => 'EduBridge API is running!', 'status' => 'success']);
+});
 
 // 👤 Mentee Registration
 Route::get('/register', fn () => view('auth.register'));

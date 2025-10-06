@@ -63,6 +63,9 @@ $_SERVER['SERVER_NAME'] = $_SERVER['SERVER_NAME'] ?? 'edubridge-lyart.vercel.app
 try {
     $app = require_once __DIR__ . '/../bootstrap/app.php';
     
+    // Boot the application to ensure all service providers are loaded
+    $app->boot();
+    
     // Handle the request
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
     $response = $kernel->handle(
@@ -77,4 +80,10 @@ try {
     echo 'Application Error: ' . $e->getMessage();
     // Use error_log instead of Laravel's file-based logging
     error_log('Laravel Error: ' . $e->getMessage());
+    error_log('Stack trace: ' . $e->getTraceAsString());
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo 'Fatal Error: ' . $e->getMessage();
+    error_log('Fatal Error: ' . $e->getMessage());
+    error_log('Stack trace: ' . $e->getTraceAsString());
 }
