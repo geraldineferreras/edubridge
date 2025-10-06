@@ -17,6 +17,21 @@ require __DIR__ . '/../vendor/autoload.php';
 // Change working directory to project root
 chdir(__DIR__ . '/..');
 
+// Create necessary directories for Vercel serverless environment
+$directories = [
+    'storage/logs',
+    'storage/framework/cache',
+    'storage/framework/sessions',
+    'storage/framework/views',
+    'bootstrap/cache'
+];
+
+foreach ($directories as $dir) {
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+}
+
 // Set up environment variables for Vercel
 if (!isset($_ENV['APP_KEY'])) {
     $_ENV['APP_KEY'] = 'base64:' . base64_encode(random_bytes(32));
@@ -30,6 +45,12 @@ if (!isset($_ENV['APP_DEBUG'])) {
 if (!isset($_ENV['APP_URL'])) {
     $_ENV['APP_URL'] = 'https://edubridge-lyart.vercel.app';
 }
+
+// Set serverless-friendly environment variables
+$_ENV['LOG_CHANNEL'] = 'errorlog';
+$_ENV['CACHE_STORE'] = 'array';
+$_ENV['SESSION_DRIVER'] = 'array';
+$_ENV['QUEUE_CONNECTION'] = 'sync';
 
 // Set up server variables for Laravel
 $_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
@@ -54,5 +75,6 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo 'Application Error: ' . $e->getMessage();
+    // Use error_log instead of Laravel's file-based logging
     error_log('Laravel Error: ' . $e->getMessage());
 }
