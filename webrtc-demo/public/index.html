@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EduBridge — Simple WebRTC</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root { --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#6d28d9; color-scheme: dark; }
+    body{font-family:Inter,system-ui,Arial;margin:0;background:linear-gradient(180deg,#071028,#061224);color:#e6eef6}
+    .app{max-width:1100px;margin:28px auto;padding:18px;}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .controls{display:flex;gap:8px;align-items:center}
+    input,button{font-size:14px;padding:8px;border-radius:8px;border:0}
+    button{cursor:pointer}
+    .videos{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    video{background:#000;border-radius:8px;width:320px;height:180px;object-fit:cover}
+    .local{outline:3px solid rgba(109,40,217,0.15)}
+    .small{width:200px;height:120px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h2 style="margin:0">EduBridge — Instant Call (MVP)</h2>
+        <small style="color:var(--muted)">Open multiple tabs to test (localhost)</small>
+      </div>
+
+      <div class="controls">
+        <input id="roomInput" placeholder="Room ID (optional)" />
+        <input id="nameInput" placeholder="Your name (optional)" />
+        <button id="joinBtn">Join Room</button>
+        <button id="leaveBtn" disabled>Leave</button>
+        <button id="muteBtn" disabled>Mute</button>
+        <button id="shareBtn" disabled>Share Screen</button>
+      </div>
+    </header>
+
+    <div class="videos">
+      <video id="localVideo" autoplay muted playsinline class="local"></video>
+      <div id="remotes"></div>
+    </div>
+  </div>
+
+  <!-- Socket.IO client (served by server) -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io(); // connect to same origin
+    const localVideo = document.getElementById('localVideo');
+    const remotes = document.getElementById('remotes');
+    const joinBtn = document.getElementById('joinBtn');
+    const leaveBtn = document.getElementById('leaveBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const roomInput = document.getElementById('roomInput');
+    const nameInput = document.getElementById('nameInput');
+
+    let roomId = null;
+    let userName = null;
+    let localStream = null;
+    const pcs = {}; // peerId -> RTCPeerConnection
+    const config = {
+      iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' }
+        // add TURN here in production
+      ]
+    };
+
+    // Start local camera + mic
+    async function startLocalMedia() {
+      if (localStream) return localStream;
+      localStream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
+      localVideo.srcObject = localStream;
+      return localStream;
+    }
+
+    // Join a room
+    async function joinRoom() {
+      roomId = (roomInput.value && roomInput.value.trim()) || ('room-' + Math.floor(Math.random()*10000));
+      userName = nameInput.value || 'Guest';
+      await startLocalMedia();
+      socket.emit('join-room', roomId, userName);
+
+      joinBtn.disabled = true;
+      leaveBtn.disabled = false;
+      muteBtn.disabled = false;
+      shareBtn.disabled = false;
+    }
+
+    joinBtn.onclick = joinRoom;
+
+    // Create and initialize a PeerConnection for peerId
+    async function initPeer(peerId, isInitiator = true) {
+      if (pcs[peerId]) return pcs[peerId];
+      const pc = new RTCPeerConnection(config);
+
+      // Send local tracks
+      localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+      // When we get a remote track, show it
+      pc.ontrack = (ev) => {
+        let vid = document.getElementById('v_' + peerId);
+        if (!vid) {
+          vid = document.createElement('video');
+          vid.id = 'v_' + peerId;
+          vid.autoplay = true; vid.playsInline = true;
+          vid.className = 'small';
+          remotes.appendChild(vid);
+        }
+        vid.srcObject = ev.streams[0];
+      };
+
+      pc.onicecandidate = (event) => {
+        if (event.candidate) {
+          socket.emit('signal', { to: peerId, from: socket.id, data: event.candidate });
+        }
+      };
+
+      pc.onconnectionstatechange = () => {
+        if (pc.connectionState === 'failed' || pc.connectionState === 'disconnected') {
+          pc.close();
+          delete pcs[peerId];
+          const vid = document.getElementById('v_' + peerId);
+          if (vid) vid.remove();
+        }
+      };
+
+      pcs[peerId] = pc;
+      return pc;
+    }
+
+    // When server tells us a user joined, create an offer to them
+    socket.on('user-joined', async (peerId, peerName) => {
+      console.log('user-joined', peerId, peerName);
+      // create an offer to the newcomer
+      const pc = await initPeer(peerId, true);
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      socket.emit('signal', { to: peerId, from: socket.id, data: pc.localDescription });
+    });
+
+    // Handle incoming signaling (offers/answers/candidates)
+    socket.on('signal', async (payload) => {
+      const { from, data } = payload;
+      if (!from || !data) return;
+      // ensure pc exists
+      if (!pcs[from]) await initPeer(from, false);
+      const pc = pcs[from];
+
+      // If we get an SDP (offer/answer)
+      if (data.type === 'offer') {
+        await pc.setRemoteDescription(new RTCSessionDescription(data));
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        socket.emit('signal', { to: from, from: socket.id, data: pc.localDescription });
+      } else if (data.type === 'answer') {
+        await pc.setRemoteDescription(new RTCSessionDescription(data));
+      } else if (data.candidate) {
+        try { await pc.addIceCandidate(data); } catch (e) { console.warn('ICE add failed', e); }
+      }
+    });
+
+    // When someone leaves
+    socket.on('user-left', (peerId) => {
+      console.log('user-left', peerId);
+      if (pcs[peerId]) {
+        pcs[peerId].close();
+        delete pcs[peerId];
+      }
+      const el = document.getElementById('v_' + peerId);
+      if (el) el.remove();
+    });
+
+    // Leave
+    leaveBtn.onclick = () => {
+      socket.emit('leave-room', roomId);
+      Object.values(pcs).forEach(pc => pc.close());
+      for (const id in pcs) delete pcs[id];
+      roomId = null;
+      joinBtn.disabled = false;
+      leaveBtn.disabled = true;
+      muteBtn.disabled = true;
+      shareBtn.disabled = true;
+      remotes.innerHTML = '';
+    };
+
+    // Mute/unmute
+    let muted = false;
+    muteBtn.onclick = () => {
+      if (!localStream) return;
+      muted = !muted;
+      localStream.getAudioTracks().forEach(t => t.enabled = !muted);
+      muteBtn.textContent = muted ? 'Unmute' : 'Mute';
+    };
+
+    // Screen share
+    let screenTrack = null;
+    shareBtn.onclick = async () => {
+      if (!localStream) return;
+      try {
+        if (!screenTrack) {
+          const displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+          screenTrack = displayStream.getVideoTracks()[0];
+
+          // Replace outgoing video track for each peer
+          for (const peerId of Object.keys(pcs)) {
+            const pc = pcs[peerId];
+            const sender = pc.getSenders().find(s => s.track && s.track.kind === 'video');
+            if (sender) await sender.replaceTrack(screenTrack);
+          }
+
+          // when user stops screen share, restore camera track
+          screenTrack.onended = async () => {
+            const camTrack = localStream.getVideoTracks()[0];
+            for (const peerId of Object.keys(pcs)) {
+              const pc = pcs[peerId];
+              const sender = pc.getSenders().find(s => s.track && s.track.kind === 'video');
+              if (sender) await sender.replaceTrack(camTrack);
+            }
+            screenTrack = null;
+          };
+        } else {
+          // stop existing screen share
+          screenTrack.stop();
+          screenTrack = null;
+        }
+      } catch (err) {
+        console.warn('Screen share failed', err);
+      }
+    };
+
+    // Auto-fill room param from ?room=... if present
+    (function() {
+      const params = new URLSearchParams(location.search);
+      if (params.get('room')) roomInput.value = params.get('room');
+      if (params.get('name')) nameInput.value = params.get('name');
+    })();
+  </script>
+</body>
+</html>

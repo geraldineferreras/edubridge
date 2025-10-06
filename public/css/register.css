@@ -1,0 +1,296 @@
+body.register-body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0b0223, #0c023a);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 700px;
+  background:  rgb(23, 39, 95);
+  border-radius: 16px;
+  display: flex;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.register-box {
+  display: flex;
+  width: 100%;
+}
+
+.form-section {
+  flex: 1;
+  padding: 40px;
+}
+
+.form-section h1 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 10px;
+  margin-top: -10px;
+  text-align: center;
+}
+
+.role {
+  color: #26d7f2;
+  font-size: 1.5rem;
+}
+
+.photo-section {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.photo-section img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #26d7f2;
+}
+
+.photo-section input[type="file"] {
+  background: transparent;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.custom-file-btn {
+  background-color: #26d7f2;
+  color: rgb(4, 4, 90);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.custom-file-btn:hover {
+  animation: neon-blue-glow 2s infinite;
+  color: white;
+  background: rgb(4, 4, 90);
+}
+
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.signup-form input {
+
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background:  rgb(38, 57, 126);
+  font-size: 1rem;
+  color: white;
+}
+
+.signup-form input::placeholder {
+  color: #ffffff;
+}
+
+@keyframes neon-blue-glow {
+  0% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+  25% {
+    box-shadow: 0 0 10px #1e90ff, 0 0 20px #00bfff, 0 0 30px #add8e6;
+  }
+  50% {
+    box-shadow: 0 0 10px #00bfff, 0 0 20px #4682b4, 0 0 30px #b0e0e6;
+  }
+  75% {
+    box-shadow: 0 0 10px #4682b4, 0 0 20px #87cefa, 0 0 30px #00ffff;
+  }
+  100% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+}
+
+.btn {
+  margin-top: -8px;
+  background: #26d7f2;
+  color: rgb(0, 0, 51);
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: -13px;
+}
+
+.btn:hover {
+  animation: neon-blue-glow 2s infinite;
+  color: white;
+  background: rgb(4, 4, 90);
+}
+
+.divider {
+  text-align: center;
+  margin: 10px 0;
+  color: #ffffff;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.divider span {
+  background:  rgb(23, 39, 95);
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.divider::before {
+  content: "";
+  height: 1px;
+  background: #ffffff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 0;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-top: -1rem;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.terms, .redirect {
+  font-size: 0.8rem;
+  color: white;
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.redirect a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.redirect a:hover {
+  color: #26d7f2;
+  text-decoration: underline;
+}
+
+.terms a {
+  color: #26d7f2;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+.profile-fields {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.profile-fields input {
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+/* Set widths */
+.profile-fields .age-field {
+  flex: 0 0 80px; /* fixed short width */
+}
+
+.profile-fields .location-field {
+  flex: 1; /* medium width */
+}
+
+.profile-fields .skills-field {
+  flex: 5; /* make this much longer */
+  min-width: 200px; /* optional: ensures it stays wide on very small screens */
+}
+
+.gender-selection {
+  gap: 15px;
+  margin-bottom: 1rem;
+  margin-top: -1.5rem;
+  margin-left: -15px;
+}
+
+.gender-selection label {
+  color: #ffffff;              /* black text */
+  padding: 1rem;       /* some padding */
+  border-radius: 5px;       /* rounded corners */
+  cursor: pointer;
+  align-items: center;
+  font-size: 1rem; 
+}
+
+/* Style the select to match inputs */
+.profile-fields .location-select {
+  width: 100%;
+  padding: 12px;               /* same as input padding */
+  border-radius: 10px;         /* same as inputs */
+  border: none;                /* same as inputs */
+  background: rgb(38, 57, 126);/* same dark blue background */
+  color: white;                /* same text color */
+  font-size: 1rem;             /* same as inputs */
+  -webkit-appearance: none;    /* remove default arrow */
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Add custom arrow for dropdown */
+.profile-fields .location-field {
+  position: relative;
+}
+
+.profile-fields .location-field::after {
+  content: "▼";                /* arrow */
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #ffffff;              /* white arrow to match text */
+  font-size: 12px;
+}
+
+/* Adjust flex width */
+.profile-fields .location-field {
+  flex: 1; /* medium width */
+  min-width: 120px;
+}

@@ -1,0 +1,379 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #0b0223, #0c023a);
+  color: #fff;
+}
+
+.logo img {
+  height: 80px;
+  object-fit: contain;
+  margin-left: 4rem;
+}
+
+/* Layout */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: linear-gradient(to right, #0b0223, #0a0231);
+  width: 250px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  transition: background 0.3s, color 0.3s;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sidebar nav a .material-icons {
+  color: white;
+  transition: color 0.3s;
+  font-weight: 600;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background-color: #26d7f2;
+  color: rgb(1, 1, 70);
+}
+
+.sidebar nav a.active .material-icons,
+.sidebar nav a:hover .material-icons {
+  color: rgb(1, 1, 70); /* same as the text color */
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.top-icons {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.top-icons .material-icons {
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.breadcrumbs {
+  color: #eee;
+  font-size: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: orange;
+  margin-top: -2rem;
+}
+
+.page {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  margin-top: 1rem;
+}
+
+/* Matchmaking Section */
+.filters {
+  display: flex;
+  justify-content: center; /* Centers children horizontally */
+  align-items: center;     /* Centers children vertically */
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+
+.filters input[type="text"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  width: 400px;   
+  padding: 10px 8px;
+  font-size: 1rem;
+}
+
+.filters label {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.match-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  color: #000;
+  background: transparent;
+}
+
+.card {
+  background-color: rgba(23, 39, 95, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+  width: 500px;         /* Same width */
+  height: 550px;        /* Fixed height */
+  text-align: center;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;     /* Prevent content from expanding height */
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 255, 255, 0.4);
+}
+
+.card img {
+  width: 150px;
+  height:150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px auto;
+}
+
+.card h2 {
+  color: #26d7f2;
+  margin-bottom: 0.5rem;
+  font-size: 2.3rem;
+}
+
+.card h3 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: white;
+  margin-top: 17px;
+}
+
+.card p {
+  font-size: 1.3rem;
+  margin: 3px 0;
+  color: white;
+  margin-top: 10px;
+}
+
+.skills span {
+  display: inline-block;
+  background-color: #26d7f2;
+  color: #0b0223;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin: 5px 5px 0 0;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+
+.material-icons {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.match-icon .material-icons {
+  font-size: 100px;
+  color: #26d7f2;
+}
+
+.match-button {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+@keyframes neon-blue-glow {
+  0% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+  25% {
+    box-shadow: 0 0 10px #1e90ff, 0 0 20px #00bfff, 0 0 30px #add8e6;
+  }
+  50% {
+    box-shadow: 0 0 10px #00bfff, 0 0 20px #4682b4, 0 0 30px #b0e0e6;
+  }
+  75% {
+    box-shadow: 0 0 10px #4682b4, 0 0 20px #87cefa, 0 0 30px #00ffff;
+  }
+  100% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+}
+
+.btn {
+  display: inline-block;
+  background-color: #26d7f2;
+  color: rgb(1, 1, 70);
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff;
+}
+
+.match-popup {
+  position: fixed;
+  top: 50%;
+  left: 56.5%;
+  transform: translate(-50%, -50%);
+  background:rgb(23, 39, 95);
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  padding: 2rem 3rem;
+  text-align: center;
+  max-width: 700px;
+  height: 330px;
+  width: 90%; 
+  z-index: 1000;
+}
+
+.match-content h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.match-content p {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.match-icon {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.match-content button {
+  margin-top: 2rem;
+  padding: .6rem 1.1rem;
+  background: #26d7f2;
+  border: none;
+  border-radius: 8px;
+  color: rgb(1, 1, 70);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.match-content button:hover {
+  animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff
+}
+
+/* Wrapper for Next Mentor button */
+.btn-wrapper1 {
+  margin-top: -30rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Style for the Next Mentor button */
+.btn-wrapper1 .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #26d7f2;
+  color: #0a0231;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+/* Hover effect */
+.btn-wrapper1 .btn:hover {
+  animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff
+}
+
+/* Icon alignment */
+.btn-wrapper1 .btn i {
+  pointer-events: none; /* avoids accidental click on icon only */
+}
+
+.next-icon {
+  margin-left: 20px;  /* 👈 move it to the right */
+}
+
+.no-underline {
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,149 @@
+/* General layout */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1e1e2e;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.video-call-container {
+  display: flex;
+  background: #252537;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 90%;
+  height: 90%;
+}
+
+/* Left Section (Videos) */
+.video-section {
+  flex: 3;
+  display: grid;
+  grid-template-areas:
+    "large large"
+    "small1 small2";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  gap: 10px;
+  padding: 15px;
+}
+
+.video {
+  background: #333;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video.large {
+  grid-area: large;
+}
+
+.video.small:nth-child(2) {
+  grid-area: small1;
+}
+.video.small:nth-child(3) {
+  grid-area: small2;
+}
+
+.username {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-size: 14px;
+  background: rgba(0,0,0,0.5);
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* Sidebar (Chat + Controls) */
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #2e2e42;
+  border-left: 2px solid #1a1a27;
+}
+
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.chat-box h3 {
+  margin: 0 0 10px;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.message span {
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.chat-input {
+  display: flex;
+  background: #3a3a54;
+  border-radius: 5px;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  border-radius: 5px 0 0 5px;
+  background: transparent;
+  color: #fff;
+}
+
+.chat-input button {
+  background: #4a4a70;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 0 5px 5px 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  background: #23233a;
+  border-top: 2px solid #1a1a27;
+}
+
+.control {
+  background: #3a3a54;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control.end {
+  background: #e74c3c;
+}

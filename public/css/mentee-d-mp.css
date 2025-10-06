@@ -1,0 +1,384 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, #0b0223, #0c023a);
+}
+
+header {
+  background-color: #0b0223;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand img {
+  height: 65px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icons i {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  height: 820px;
+}
+
+.profile {
+  width: 60%;
+  background: rgba(23, 39, 95, 0.9);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 1rem;
+  object-fit: cover;
+  margin-top: -1rem;
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  color: white;
+}
+
+.role {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.specialty {
+  color: orange;
+  font-size: 1rem;
+  margin-top: 0rem;
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: white;
+}
+
+.details i {
+  margin-right: 4px;
+  margin-bottom: -1rem;
+}
+
+.skills {
+  margin-top: -0.8rem;
+}
+
+.skills h4 {
+  margin-bottom: 0.5rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.skill-badge {
+  display: inline-block;
+  background: #0b0b47;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 20px;
+  margin: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: -1rem;
+}
+
+.about, .feedback {
+  margin-top: -0.5rem;
+  color: #26d7f2;
+}
+
+.about h4, .feedback h4 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.about p {
+  font-size: 1rem;
+  color: #ffffff;
+  line-height: 1.5;
+  margin-top: -0.4rem;
+}
+
+.feedback-item {
+  background: #040444;
+  padding: 1px 20px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.feedback-item p {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.feedback-item strong {
+  color: #ffffff;
+}
+
+
+.btn-wrapper {
+  display: flex;
+  margin-top: 1rem;
+}
+
+@keyframes neon-blue-glow {
+  0% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+  25% {
+    box-shadow: 0 0 10px #1e90ff, 0 0 20px #00bfff, 0 0 30px #add8e6;
+  }
+  50% {
+    box-shadow: 0 0 10px #00bfff, 0 0 20px #4682b4, 0 0 30px #b0e0e6;
+  }
+  75% {
+    box-shadow: 0 0 10px #4682b4, 0 0 20px #87cefa, 0 0 30px #00ffff;
+  }
+  100% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+}
+
+.btn {
+  display: inline-block;
+  background-color: #26d7f2;
+  color: rgb(1, 1, 70);
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff;
+}
+
+.plan {
+  width: 40%;
+  background-color: #040444;
+  color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.plan h2 {
+    margin-top: 5rem;
+  font-size: 3rem;
+}
+
+.plan-price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.plan-price span {
+  font-size: 1.5rem;
+}
+
+.plan-details {
+  font-size: 1.2rem;
+  margin-bottom: 5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin: 0.7rem 0;
+  gap: 30px;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.feature i {
+  color: #26d7f2;
+  font-size: 2rem;
+}
+
+.btn-wrapper2 {
+  display: flex;
+  margin-top: 7.5rem;
+}
+
+@keyframes neon-blue-glow {
+  0% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+  25% {
+    box-shadow: 0 0 10px #1e90ff, 0 0 20px #00bfff, 0 0 30px #add8e6;
+  }
+  50% {
+    box-shadow: 0 0 10px #00bfff, 0 0 20px #4682b4, 0 0 30px #b0e0e6;
+  }
+  75% {
+    box-shadow: 0 0 10px #4682b4, 0 0 20px #87cefa, 0 0 30px #00ffff;
+  }
+  100% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #1e90ff, 0 0 30px #87cefa;
+  }
+}
+
+.btn2 {
+  display: inline-block;
+  background-color: #26d7f2;
+  color: rgb(1, 1, 70);
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.btn2:hover {
+  animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff;
+}
+
+/* ✅ Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgb(23, 39, 95);
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.modal-content p {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.okay-btn {
+  margin-top: 1.5rem;
+  background-color: #26d7f2;
+  color: #0b0223;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.okay-btn:hover {
+    animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff
+}
+
+/* ✅ Feedback Form - Horizontal Layout */
+.feedback-form {
+  display: flex;
+  gap: 1rem; /* space between elements */
+  align-items: center; /* vertically align */
+  margin-bottom: 1rem;
+  flex-wrap: wrap; /* ensures responsiveness on small screens */
+}
+
+.feedback-form textarea,
+.feedback-form select,
+.feedback-form button {
+  height: 50px; /* same height for all */
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  padding: 0 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.feedback-form textarea {
+  flex: 2; /* takes more width */
+  background: #0b0b47;
+  color: white;
+  resize: none; /* prevent resizing */
+}
+
+.feedback-form select {
+  flex: 1; /* smaller than textarea */
+  background: #0b0b47;
+  color: white;
+}
+
+.feedback-form button {
+  flex: 1; /* same as select */
+  background-color: #26d7f2;
+  color: rgb(1, 1, 70);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.feedback-form button:hover {
+  animation: neon-blue-glow 2s infinite;
+  background: rgb(1, 1, 70);
+  color: #ffffff;
+}
+
+/* Placeholder color */
+.feedback-form textarea::placeholder,
+.feedback-form select::placeholder {
+    color: #ffffff; /* light blue */
+    opacity: 1;
+    font-style: italic;
+}
+
+/* Typed text color matches placeholder */
+.feedback-form textarea {
+    color: #ffffff; /* same light blue as placeholder */
+    background: #0b0b47;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    height: 25px;
+}
