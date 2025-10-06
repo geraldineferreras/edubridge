@@ -18,6 +18,8 @@
     "LOG_LEVEL": "error",
     "CACHE_STORE": "array",
     "SESSION_DRIVER": "array",
-    "QUEUE_CONNECTION": "sync"
+    "QUEUE_CONNECTION": "sync",
+    "DB_CONNECTION": "sqlite",
+    "DB_DATABASE": ":memory:"
   }
 }

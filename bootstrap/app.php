@@ -25,9 +25,12 @@ $app = Application::configure(basePath: dirname(__DIR__))
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
-        Illuminate\Cookie\CookieServiceProvider::class, // ✅ Cookie binding fix
+        Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Encryption\EncryptionServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
@@ -40,7 +43,10 @@ $app = Application::configure(basePath: dirname(__DIR__))
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Illuminate\Encryption\EncryptionServiceProvider::class, // ✅ Required for Encrypter
+        
+        // App-specific providers
+        App\Providers\AppServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ])
     ->create();
 

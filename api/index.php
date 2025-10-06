@@ -51,6 +51,8 @@ $_ENV['LOG_CHANNEL'] = 'errorlog';
 $_ENV['CACHE_STORE'] = 'array';
 $_ENV['SESSION_DRIVER'] = 'array';
 $_ENV['QUEUE_CONNECTION'] = 'sync';
+$_ENV['DB_CONNECTION'] = 'sqlite';
+$_ENV['DB_DATABASE'] = ':memory:'; // Use in-memory SQLite for serverless
 
 // Set up server variables for Laravel
 $_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
