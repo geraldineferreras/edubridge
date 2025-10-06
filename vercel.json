@@ -1,7 +1,6 @@
 {
   "version": 2,
   "outputDirectory": "public",
-  // Explicitly pin both Functions and legacy Builds to Node 20-compatible vercel-php
   "functions": {
     "api/**/*.php": {
       "runtime": "vercel-php@0.7.5",
