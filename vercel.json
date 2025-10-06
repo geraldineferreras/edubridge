@@ -2,7 +2,7 @@
   "version": 2,
   "outputDirectory": "public",
   "functions": {
-    "api/index.php": { "runtime": "vercel-php@0.8.1" }
+    "api/**/*.php": { "runtime": "@vercel/php" }
   },
   "routes": [
     { "src": "/(.*)", "dest": "/api/index.php" }
