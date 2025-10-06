@@ -64,19 +64,10 @@ $_SERVER['SERVER_NAME'] = $_SERVER['SERVER_NAME'] ?? 'edubridge-lyart.vercel.app
 // Initialize Laravel application
 try {
     $app = require_once __DIR__ . '/../bootstrap/app.php';
-    
-    // Boot the application to ensure all service providers are loaded
-    $app->boot();
-    
-    // Handle the request
-    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-    $response = $kernel->handle(
-        $request = Illuminate\Http\Request::capture()
-    );
-    
-    $response->send();
-    $kernel->terminate($request, $response);
-    
+
+    // Delegate to Laravel's default request lifecycle (avoids early bindings)
+    $app->handleRequest(Illuminate\Http\Request::capture());
+
 } catch (Exception $e) {
     http_response_code(500);
     echo 'Application Error: ' . $e->getMessage();
