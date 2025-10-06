@@ -53,4 +53,11 @@ $app = Application::configure(basePath: dirname(__DIR__))
 // ✅ Bind MaintenanceMode interface to implementation
 $app->singleton(MaintenanceMode::class, MaintenanceModeManager::class);
 
+// ✅ Ensure the 'files' binding exists early for components that expect it
+// Some framework services resolve 'files' from the container during boot.
+// Binding it here avoids "Target class [files] does not exist" in serverless.
+$app->singleton('files', function () {
+    return new Illuminate\Filesystem\Filesystem();
+});
+
 return $app;
